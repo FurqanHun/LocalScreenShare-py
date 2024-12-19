@@ -29,8 +29,11 @@ MAX_PACKET_SIZE = 1024
 
 class ScreenStreamer:
     def __init__(self, host, port=8080):
-        self.server_address = (host, port)
+        #self.server_address = (host, port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.server_address = ('<broadcast>', port)
+
         self.running = True
 
     def start_streaming(self):
@@ -86,7 +89,7 @@ def get_local_ip():
 if __name__ == "__main__":
     local_ip = get_local_ip() 
     print(f"Local IP Address: {local_ip}")
-   # streamer = ScreenStreamer(host=local_ip, port=8080)  # Bind to all interfaces
+    # Bind to all interfaces
     streamer = ScreenStreamer(host="0.0.0.0", port=8080)
     try:
         streamer.start_streaming()

@@ -4,7 +4,7 @@ import numpy as np
 import time
 
 MAX_PACKET_SIZE = 1024  # Keep this in sync with the sender
-UDP_IP = ""  # Your server's IP address
+UDP_IP = "0.0.0.0"  # will listen to all interfaces
 UDP_PORT = 8080
 TIMEOUT = 5  # Seconds to wait for packets before resetting buffer
 
